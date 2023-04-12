@@ -66,7 +66,6 @@ int	main(int ac, char **av, char **ev)
 		lexer(&data, stpar);
 		data.cmd_table = parser(data.cmd_ll);
 		executor(&data);
-		printf("Hello%d\n", getpid());
 		free(data.cmd_str);
 		free_cmdtable(&data);
 		ft_lstclear(&data.cmd_ll, &free_token);
