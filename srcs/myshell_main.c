@@ -57,10 +57,16 @@ int	main(int ac, char **av, char **ev)
 		data.cmd_str = readline(data.my_env.dis_str);
 		if (data.cmd_str == NULL)
 			break ;
+		if (ft_strlen(data.cmd_str) == 0)
+		{
+			free(data.cmd_str);
+			continue ;
+		}
 		add_history(data.cmd_str);
 		lexer(&data, stpar);
 		data.cmd_table = parser(data.cmd_ll);
 		executor(&data);
+		free(data.cmd_str);
 		free_cmdtable(&data);
 		ft_lstclear(&data.cmd_ll, &free_token);
 	}

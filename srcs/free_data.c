@@ -19,8 +19,6 @@ void	free_cmdtable(t_data *data)
 		free(data->cmd_table->infile);
 	if (data->cmd_table->outfile)
 		free(data->cmd_table->outfile);
-	free(data.cmd_str);
-	free_arr(data.cmd_table->cmds->cmd_arr);
 	free(data->cmd_table);
 	data->cmd_table = NULL;
 }
@@ -31,9 +29,12 @@ void	free_arr(char **arr)
 
 	if (!arr[0])
 		return ;
-	i = -1;
-	while (arr[++i])
+	i = 0;
+	while (arr[i])
+	{
 		free(arr[i]);
+		i++;
+	}	
 	free(arr);
 }
 
@@ -58,7 +59,6 @@ void	free_token(void *content)
 void	node_clear(t_cmd_node **node)
 {
 	t_cmd_node	*prev;
-	int			i = 0;
 
 	if (!node)
 		return ;
@@ -69,6 +69,5 @@ void	node_clear(t_cmd_node **node)
 		free_arr(prev->cmd_arr);
 		free(prev);
 		prev = *node;
-		i++;
 	}
 }

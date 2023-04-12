@@ -26,6 +26,8 @@ char	**ll_to_strarr(t_list *cmd_ll)
 	while (ptr)
 	{
 		argv[i] = ft_strdup(ptr->token);
+		// printf("token |%s|\n", argv[i]);
+		free(ptr->token);
 		ptr = ptr->next;
 		i++;
 	}

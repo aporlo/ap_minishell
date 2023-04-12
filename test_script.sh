@@ -13,7 +13,7 @@ EXEC="minishell"
 RESTART_CMD="make re"
 
 # Prefix shell command
-PREFIX_COMMAND="input command"
+PREFIX_COMMAND="Minishell@ minishellintra: "
 
 # Testcase file, use -f as flag to apply specfic test for `test_mnshell.sh`
 TEST_FILE="testcase"

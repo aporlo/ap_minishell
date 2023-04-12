@@ -1,0 +1,15 @@
+.DS_Store
+.vscode
+
+*.o
+*.txt
+
+*test*
+!test.sh
+
+minishell
+build
+libft/libft.a
+
+output.txt
+input.txt
