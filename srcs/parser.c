@@ -39,13 +39,16 @@ t_cmd_table	*parser(t_list *cmd_ll)
 	{
 		if (isredirection(right) || !ft_strncmp(right->token, "|", 2))
 		{
+			temp = NULL;
 			redirection_parse(right, cmd_table);
 			temp = sub_linklist(left, right);
 			node_addback(&cmd_table->cmds, newnode(temp));
-			free_temp(temp);
+			if (temp != NULL)
+				free(temp);
 			left = right->next;
 			if (isredirection(right))
 				left = left->next;
+			free(right->token);
 		}
 		if (right->next == NULL)
 			node_addback(&cmd_table->cmds, newnode(left));

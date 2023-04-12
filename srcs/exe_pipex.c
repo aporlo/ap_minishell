@@ -37,7 +37,7 @@ static int	child_processes(t_system *env, t_cmd_node *node, t_executor *exe)
 	exe->node_ptr++;
 	exe->pid = fork();
 	if (exe->pid < 0)
-		return (0);
+		exit(0);
 	else if (exe->pid == 0)
 	{
 		if (exe->node_ptr == 0)
@@ -49,7 +49,7 @@ static int	child_processes(t_system *env, t_cmd_node *node, t_executor *exe)
 				exe->pipe[exe->node_ptr * 2 + 1]);
 		close_pipes(exe);
 		if (exec(env, node))
-			return (0);
+			exit(0);
 	}
 	return (1);
 }
@@ -71,11 +71,13 @@ int	pipe_executor(t_data *data, t_executor *exe)
 	while (cmd_ptr)
 	{
 		if (!child_processes(&data->my_env, cmd_ptr, exe))
-			return (0);
+			exit(0);
 		cmd_ptr = cmd_ptr->next;
 	}
 	close_pipes(exe);
-	waitpid(-1, NULL, 0);
+	while(waitpid(-1, NULL, 0) != -1)
+	{
+	}
 	tcsetattr(STDIN_FILENO, TCSANOW, data->my_env.myshell_term);
 	return (1);
 }
