@@ -65,6 +65,17 @@ int	main(int ac, char **av, char **ev)
 		add_history(data.cmd_str);
 		lexer(&data, stpar);
 		data.cmd_table = parser(data.cmd_ll);
+		// 	for (t_cmd_node *n = data.cmd_table[0].cmds; n != NULL;)
+		// 		{
+		// 			for (int k = 0; n->cmd_arr[k] != NULL; k++)
+		// 			{
+					
+		// 				printf("|%d|-|%s|\n", k, n->cmd_arr[k]);
+		// 			}
+		// 			// printf("|%p|\n", n->next);
+		// 			n = n->next;
+		// 		}
+		// printf("out %s\n", data.cmd_table->outfile);
 		executor(&data);
 		free(data.cmd_str);
 		free_cmdtable(&data);

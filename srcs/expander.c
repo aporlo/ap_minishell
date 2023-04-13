@@ -75,6 +75,28 @@ static char	*expand_dollar(char *cast)
 	return (cast);
 }
 
+// static void	*epur_str(char *str)
+// {
+// 	int	idx;
+// 	int	fd;
+
+// 	idx = 0;
+// 	fd = 1;
+// 	while (str[idx] == ' ' || str[idx] == '\t')
+// 		idx++;
+// 	while (str[idx] != '\0')
+// 	{
+// 		if (str[idx] == ' ' || str[idx] == '\t')
+// 		{
+// 			if (str[idx + 1] > ' ' && str[idx + 1] != '\0')
+// 				ft_putchar_fd(' ', fd);
+// 		}
+// 		else if (str[idx] != ' ' && str[idx] != '\t')
+// 			ft_putchar_fd(str[idx], fd);
+// 		idx++;
+// 	}
+// }
+
 static char	*quote_remove(void *content)
 {
 	char	*casted;
@@ -105,7 +127,9 @@ void	expander(t_list **cmd_ll)
 	{
 		casted = (char *) ptr->token;
 		if (casted[0] == 39)
+		{
 			ptr->token = (void *) quote_remove(casted);
+		}	
 		else if (casted[0] == 34)
 		{
 			casted = quote_remove(casted);
@@ -118,5 +142,5 @@ void	expander(t_list **cmd_ll)
 			ptr->token = (void *) expand_dollar(casted);
 		ptr = ptr->next;
 	}
-	// free(casted);
 }
+

@@ -51,6 +51,8 @@ static int	child_processes(t_system *env, t_cmd_node *node, t_executor *exe)
 		if (exec(env, node))
 			exit(0);
 	}
+	else
+	
 	return (1);
 }
 
