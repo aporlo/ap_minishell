@@ -35,16 +35,25 @@ int	single_executor(t_data *data, t_executor *exe)
 	signal_operator(&data->my_env, BASH_OPT);
 	dup_io_cmdt(exe, cmdt->infile, cmdt->outfile);
 	exe->pid = fork();
-	if (exe->pid < 0)
-		return (0);
-	else if (exe->pid == 0)
-	{
-		if (exec(&data->my_env, cmdt->cmds))
+	// if (is_buildins(data->cmd_table->cmds->cmd_arr[0]))
+	// 	buildins(data, exe);
+	// else
+	// {
+	// 	printf("hello\n");
+		if (exe->pid < 0)
 			return (0);
-	}
-	else
-		wait(NULL);
-	waitpid(-1, NULL, 0);
+		else if (exe->pid == 0)
+		{
+			// printf("dkw\n");
+			if (!ft_strncmp(data->cmd_table->cmds->cmd_arr[0], "echo", 5))
+				exit(exe_echo(exe, data->cmd_table->cmds));
+			if (exec(&data->my_env, cmdt->cmds))
+				return (0);
+		}
+		else
+			wait(NULL);
+		waitpid(-1, NULL, 0);
+	// }
 	tcsetattr(STDIN_FILENO, TCSANOW, data->my_env.myshell_term);
 	return (1);
 }

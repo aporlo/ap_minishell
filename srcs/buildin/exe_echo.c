@@ -26,9 +26,11 @@ int	exe_echo(t_executor *exe, t_cmd_node *node)
 	while (node->cmd_arr[++i])
 	{
 		ft_putstr_fd(node->cmd_arr[i], fd);
-		// ft_putchar_fd(' ', fd);
 	}
 	if (ft_strncmp(node->cmd_arr[1], "-n", 3))
+	{
+		// printf("hello\n");
 		ft_putchar_fd('\n', fd);
+	}	
 	return (0);
 }

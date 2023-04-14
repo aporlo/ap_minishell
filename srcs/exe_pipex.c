@@ -48,11 +48,11 @@ static int	child_processes(t_system *env, t_cmd_node *node, t_executor *exe)
 			dup_pipes(exe->pipe[exe->node_ptr * 2 - 2],
 				exe->pipe[exe->node_ptr * 2 + 1]);
 		close_pipes(exe);
+		if (!ft_strncmp(node->cmd_arr[0], "echo", 5))
+			exit(exe_echo(exe, node));
 		if (exec(env, node))
 			exit(0);
 	}
-	else
-	
 	return (1);
 }
 
@@ -77,7 +77,7 @@ int	pipe_executor(t_data *data, t_executor *exe)
 		cmd_ptr = cmd_ptr->next;
 	}
 	close_pipes(exe);
-	while(waitpid(-1, NULL, 0) != -1)
+	while (waitpid(-1, NULL, 0) != -1)
 	{
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, data->my_env.myshell_term);

@@ -31,6 +31,9 @@ echo 10    "20     "     '30     '
 echo "$HOME" '$HOME'
 ls | wc
 echo x > redirect1 | echo
+# echo 10 > 10 | echo hello
+# export A=11 | echo $A
+# export A=a | export A=b
 cat redirect1
-# rm redirect1 | echo
+rm redirect1 | echo
 echo fin
